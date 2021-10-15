@@ -12,7 +12,8 @@ def db_connection():
 
 def create_tables():
     tables = [
-        "CREATE TABLE IF NOT EXISTS flashcard(id INTEGER PRIMARY KEY, collection_id INTEGER, sideA TEXT, sideB TEXT)"
+        "CREATE TABLE IF NOT EXISTS flashcard(id INTEGER PRIMARY KEY, collection_id INTEGER, sideA TEXT, sideB TEXT)",
+        "CREATE TABLE IF NOT EXISTS blog_post(id INTEGER PRIMARY KEY, post_date DATE, edit_date DATE, location TEXT, author TEXT, author_id INTEGER, post_title TEXT, post_body TEXT)"       
     ]
     db = db_connection()
     cursor = db.cursor()

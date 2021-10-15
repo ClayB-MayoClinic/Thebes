@@ -2,10 +2,57 @@ import flask
 from flask import request, jsonify
 from flask.helpers import flash
 import flash_controller
+import blog_controller
 from db import create_tables
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+
+# Blog Post Routes ***********************************************************
+
+@app.route("/blog/posts", methods=["GET"])
+def get_posts():
+    posts = blog_controller.get_posts()
+    return jsonify(posts)
+
+@app.route("/blog/post", methods=["POST"])
+def insert_post():
+    post_info = request.get_json()
+    post_date = post_info["post_date"]
+    edit_date = post_info["edit_date"]
+    location = post_info["location"] 
+    author = post_info["author"]
+    author_id = post_info["author_id"]
+    post_title = post_info["post_title"] 
+    post_body = post_info["post_body"]
+    result = blog_controller.insert_post(post_date, edit_date, location, author, author_id, post_title, post_body)
+    return jsonify(result)
+
+@app.route("/blog/post", methods=["PUT"])
+def update_post():
+    post_info = request.get_json()
+    post_id = post_info["post_id"]
+    post_date = post_info["post_date"]
+    edit_date = post_info["edit_date"]
+    location = post_info["location"] 
+    author = post_info["author"]
+    author_id = post_info["author_id"]
+    post_title = post_info["post_title"] 
+    post_body = post_info["post_body"]
+    result = blog_controller.update_post(post_id, post_date, edit_date, location, author, author_id, post_title, post_body)
+    return jsonify(result)
+
+@app.route("/blog/post/<id>", methods=["DELETE"])
+def delete_post(id):
+    result = blog_controller.delete_post(id)
+    return jsonify(result)
+
+@app.route("/blog/post/<id>", methods=["GET"])
+def get_post_by_id(id):
+    post = blog_controller.get_by_id(id)
+    return jsonify(post)
+
+# Flash Card Routes **********************************************************
 
 @app.route("/flashcards", methods=["GET"])
 def get_flashcards():
@@ -40,6 +87,8 @@ def delete_flashcard(id):
 def get_flashcard_by_id(id):
     card = flash_controller.get_by_id(id)
     return jsonify(card)
+
+# CORS for localhost *********************************************************
 
 @app.after_request
 def after_request(response):
