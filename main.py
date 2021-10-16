@@ -88,6 +88,12 @@ def get_flashcard_by_id(id):
     card = flash_controller.get_by_id(id)
     return jsonify(card)
 
+# sanity check route
+
+@app.route('/ping', methods=['GET'])
+def ping_pong():
+    return jsonify('pong!')
+
 # CORS for localhost *********************************************************
 
 @app.after_request
