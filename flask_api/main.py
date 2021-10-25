@@ -93,8 +93,13 @@ def all_posts():
         result = blog_controller.insert_post(post_date, edit_date, location, author, author_id, post_title, post_subtitle, post_body, post_tags)
         response_object['message'] = 'Post Added!'
     else:
+        # Not currently being used
         posts = blog_controller.get_posts()
-        response_object['posts'] = posts
+
+        # Use blog_objects JSON file to load blog posts
+        blog_objects = open('blog_objects.js')
+        data = json.load(blog_objects)
+        response_object['blogs'] = data
     return jsonify(response_object)
 
 @app.route("/blog/post/<id>", methods=['PUT', 'DELETE'])
@@ -102,6 +107,7 @@ def single_post(id):
     response_object = {'status': 'success'}
     if request.method == 'PUT':
         post_data = request.get_json()
+        post_id = id
         post_date = post_data["post_date"]
         edit_date = post_data["edit_date"]
         location = post_data["location"] 
@@ -111,7 +117,7 @@ def single_post(id):
         post_subtitle = post_data["post_subtitle"]
         post_body = post_data["post_body"]
         post_tags = post_data["post_tags"]
-        blog_controller.update_post(post_date, edit_date, location, author, author_id, post_title, post_subtitle, post_body, post_tags)
+        blog_controller.update_post(post_id, post_date, edit_date, location, author, author_id, post_title, post_subtitle, post_body, post_tags)
         response_object['message'] = 'Post Updated!'
     if request.method == 'DELETE':
         blog_controller.delete_post(id)

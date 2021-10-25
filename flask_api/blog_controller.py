@@ -1,3 +1,5 @@
+import json
+import collections
 from db import db_connection
 
 def insert_post(post_date, edit_date, location, author, author_id, post_title, post_subtitle, post_body, post_tags):
@@ -33,4 +35,43 @@ def get_posts():
     cursor = db.cursor()
     query = "SELECT * FROM blogs"
     cursor.execute(query)
-    return cursor.fetchall()
+
+    rows = cursor.fetchall()
+
+    rowarray_list = []
+    for row in rows: 
+        t = (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9])
+        rowarray_list.append(t)
+    
+    j = json.dumps(rowarray_list)
+
+    with open ('blog_rowarrays.js', 'w') as f:
+        f.write(j)
+
+    # Convert query to objects of key-value pairs
+    objects_list = []
+    for row in rows:
+        d = collections.OrderedDict()
+        d['post_id'] = row[0] 
+        d['post_date'] = row[1]
+        d['edit_date'] = row[2] 
+        d['location'] = row[3] 
+        d['author'] = row[4] 
+        d['author_id'] = row[5] 
+        d['post_title'] = row[6] 
+        d['post_subtitle'] = row[7] 
+        d['post_body'] = row[8] 
+        d['post_tags'] = row[9]
+        objects_list.append(d)
+
+    j = json.dumps(objects_list)
+
+    with open('blog_objects.js', 'w') as f:
+        f.write(j)
+    
+    return j
+
+
+        
+
+
