@@ -45,7 +45,7 @@ def all_books():
         })
         response_object['message'] = 'Book added!'
     else:
-        books = book_controller.get_books()
+        books = BOOKS
         response_object['books'] = books
     return jsonify(response_object)
 
