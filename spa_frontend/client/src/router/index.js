@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Books from '../components/Books.vue';
 import Ping from '../components/Ping.vue';
 import Blogs from '../components/Blogs.vue';
+import BlogList from '../components/BlogList.vue';
+import BlogView from '../components/BlogView.vue';
 
 Vue.use(Router);
 
@@ -24,6 +26,16 @@ export default new Router({
       path: '/blogs',
       name: 'Blogs',
       component: Blogs,
+    },
+    {
+      path: '/bloglist',
+      name: 'BlogList',
+      component: BlogList,
+    },
+    {
+      path: '/blog',
+      name: 'BlogView',
+      component: BlogView,
     },
   ],
 });
