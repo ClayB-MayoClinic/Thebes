@@ -1,5 +1,5 @@
 # Project Thebes
-A Personal Development Server
+## A Personal Development Server
 
 ## Running Flask Server
 python main.py
