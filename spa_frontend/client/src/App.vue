@@ -6,6 +6,13 @@
 
 <style>
   #app {
-    margin-top: 60px
+  }
+
+  .container{
+    margin: 20px;
+  }
+
+  table{
+    margin-top:15px;
   }
 </style>

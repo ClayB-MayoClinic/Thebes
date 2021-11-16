@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Books from '../components/Books.vue';
 import Ping from '../components/Ping.vue';
-import Blogs from '../components/Blogs.vue';
+import Blogs from '../components/BlogsTable.vue';
 import BlogList from '../components/BlogList.vue';
 import BlogView from '../components/BlogView.vue';
 
@@ -23,8 +23,8 @@ export default new Router({
       component: Ping,
     },
     {
-      path: '/blogs',
-      name: 'Blogs',
+      path: '/blogstable',
+      name: 'blogstable',
       component: Blogs,
     },
     {

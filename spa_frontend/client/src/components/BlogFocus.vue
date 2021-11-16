@@ -1,17 +1,20 @@
 <template>
+   <div class="container">
 <!-- eslint-disable max-len -->
-    <div class = "blog-focus">
-            <h3>
-                h3. Lorem ipsum dolor sit amet.
-            </h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-            </p>
-            <p>
-             vulputate nec bibendum nec, posuere nec lacus. Aliquam mi erat,
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>.
-            </p>
+    <div class = "blog-focus" >
+      <h1>{{blog.post_title}}</h1>
+      <h3>{{blog.post_subtitle}}</h3>
+      <h5>{{blog.author}}</h5>
+      <h5>{{blog.post_date}}</h5>
+      <p v-html="blog.post_body">{{blog.post_body}}</p>
     </div>
+   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    blog: {},
+  },
+};
+</script>
