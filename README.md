@@ -1,6 +1,5 @@
 # Project Thebes
-## Clay Brimm
-A personal development server built with Python Flask.
+A Personal Development Server
 
 ## Running Flask Server
 python main.py
